@@ -1,0 +1,12 @@
+[Unit]
+Description=Waydroid Container
+Wants=dev-binderfs.mount
+
+[Service]
+ExecStartPre=/usr/bin/ln -sf /dev/binderfs/binder /dev/binderfs/vndbinder /dev/binderfs/hwbinder /dev/
+ExecStart=/usr/bin/waydroid -w container start
+ExecStop=/usr/bin/waydroid container stop
+ExecStopPost=/usr/bin/waydroid session stop
+
+[Install]
+WantedBy=multi-user.target
